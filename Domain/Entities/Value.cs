@@ -1,6 +1,6 @@
 ﻿
 
-namespace Domain
+namespace Domain.Entities
 {
     public class Value
     {
