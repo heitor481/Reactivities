@@ -4,13 +4,14 @@ import { IActivity } from '../../../app/models/activity';
 import {v4 as uuid} from 'uuid';
 
 interface IProps {
-    setEditMode: (editMode: boolean) => void
-    activity: IActivity | null,
-    createActivity: (activity: IActivity) => void,
-    editActivity: (activity: IActivity) => void
+    setEditMode: (editMode: boolean) => void;
+    activity: IActivity | null;
+    createActivity: (activity: IActivity) => void;
+    editActivity: (activity: IActivity) => void;
+    submiting: boolean;
 }
 
-const ActivityForm: React.FC<IProps> = ({setEditMode, activity: initializeFormActivity, createActivity, editActivity}) => {
+const ActivityForm: React.FC<IProps> = ({setEditMode, activity: initializeFormActivity, createActivity, editActivity, submiting}) => {
 
     const initializeForm = () => {
         if(initializeFormActivity) {
@@ -57,7 +58,7 @@ const ActivityForm: React.FC<IProps> = ({setEditMode, activity: initializeFormAc
                 <Form.Input onChange={handleInput} name='date' type='datetime-local' placeholder='Date' value={activity.date}></Form.Input>
                 <Form.Input onChange={handleInput} name='city' placeholder='City' value={activity.city}></Form.Input>
                 <Form.Input onChange={handleInput} name='venue' placeholder='Venue' value={activity.venue}></Form.Input>
-                <Button floated='right'  positive type='submit' content='Submit' />
+                <Button floated='right' loading={submiting} positive type='submit' content='Submit' />
                 <Button onClick={() => setEditMode(false)} floated='right' negative type='button' content='Cancel' />
             </Form>
         </Segment>
