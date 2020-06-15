@@ -68,10 +68,8 @@ const App = () => {
         <Container style={{marginTop: '7em'}}>
           <ActivityDashboard 
           activities={activityStore.activities} 
-          selectActivity={handleSelectActivity} 
-          selectedActivity={selectActivity!}
+          selectActivity={handleSelectActivity}
           setSelectedActivity={setSelectActivity}
-          editMode={editMode}
           setEditMode={setEditMode}
           createActivity={handleCreateActivity}
           editActivity={handleEditActivity}

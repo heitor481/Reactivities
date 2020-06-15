@@ -7,16 +7,30 @@ import agent from '../api/agent';
 class ActivityStore {
     @observable activities: IActivity[] = [];
     @observable loadingInitial = false;
+    @observable selectedActivity: IActivity | undefined;
+    @observable editMode = false;
+    @observable activityForm: IActivity | undefined;
 
-    @action loadActivities = () => {
+    @action loadActivities = async () => {
         this.loadingInitial = true;
-        agent.Activities.list().then((activities) => {
+        try {
+            const activities = await agent.Activities.list();
             activities.forEach(activiy => {
-                activiy.date = activiy.date.split('.')[0];
-                this.activities.push(activiy);
-              })
-           }).finally(() => this.loadingInitial = false);
-        };
+            activiy.date = activiy.date.split('.')[0];
+            this.activities.push(activiy);
+          });
+          this.loadingInitial = false;
+        } catch(error) {
+            console.log(error);
+            this.loadingInitial = false;
+        }
+    }
+
+
+    @action selectActivity = (id: string) => {
+        this.selectedActivity = this.activities.find(a => a.id === id);
+        this.editMode = false;
+    }
 }
 
 export default createContext(new ActivityStore());
