@@ -6,7 +6,7 @@ import ActivtyStore from '../../../app/stores/activityStore';
 import { observer } from 'mobx-react-lite';
 
 interface IProps {
-    activity: IActivity | null;
+    activity: IActivity | null | void;
 }
 
 const ActivityForm: React.FC<IProps> = ({activity: initializeFormActivity}) => {
