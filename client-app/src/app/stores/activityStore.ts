@@ -7,10 +7,8 @@ configure({enforceActions: 'always'});
 
 class ActivityStore {
     @observable activityRegistry = new Map();
-    @observable activities: IActivity[] = [];
     @observable loadingInitial = false;
     @observable activity: IActivity | null = null;
-    @observable editMode = false;
     @observable activityForm: IActivity | undefined;
     @observable submiting = false;
     @observable target = '';
@@ -74,12 +72,10 @@ class ActivityStore {
             await agent.Activities.create(activity);
             runInAction('create activity', () => {
                 this.activityRegistry.set(activity.id, activity);
-                this.editMode = false;
                 this.submiting = false;
             });
         } catch (error) {
             runInAction('create activity error', () => {
-                this.editMode = false;
                 this.submiting = false;
             });
             console.log(error);
@@ -93,12 +89,10 @@ class ActivityStore {
             runInAction('edit activity', () => {
                 this.activityRegistry.set(activity.id, activity);
                 this.activity = activity;
-                this.editMode = false;
                 this.submiting = false;
             });
         } catch(error) {
             runInAction('edit activity error', () => {
-                this.editMode = false;
                 this.submiting = false;
             })
             
@@ -123,31 +117,6 @@ class ActivityStore {
             });
             console.log(error);
         }
-    }
-
-    @action openEditForm = (id: string) => {
-        this.activity = this.activityRegistry.get(id);
-        this.editMode = true;
-    }
-
-    @action cancelSelectedActivity = () => {
-        this.activity = null;
-
-    }
-
-    @action cancelFormOpen = () => {
-        this.editMode = false;
-    }
-
-    @action openCreateForm = () => {
-        this.editMode = true;
-        this.activity = null;
-    }
-
-
-    @action selectActivity = (id: string) => {
-        this.activity = this.activityRegistry.get(id);
-        this.editMode = false;
     }
 }
 

@@ -12,7 +12,7 @@ interface DetailParams {
 
 const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({match, history}) => {
     const activityStore = useContext(ActivtyStore);
-    const {createActivity, editActivity, submiting, cancelFormOpen, 
+    const {createActivity, editActivity, submiting,  
         activity: initializeFormActivity, loadActivity, cleanActivity} = activityStore;
 
     
@@ -71,7 +71,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({match, histo
                 <Form.Input onChange={handleInput} name='city' placeholder='City' value={activity.city}></Form.Input>
                 <Form.Input onChange={handleInput} name='venue' placeholder='Venue' value={activity.venue}></Form.Input>
                 <Button floated='right' loading={submiting} positive type='submit' content='Submit' />
-                <Button onClick={cancelFormOpen} floated='right' negative type='button' content='Cancel' />
+                <Button onClick={() => history.push('/activities')} floated='right' negative type='button' content='Cancel' />
             </Form>
         </Segment>
     )
