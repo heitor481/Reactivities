@@ -1,12 +1,9 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import { Grid } from 'semantic-ui-react';
 import ActivityList from './ActivityList';
 import { observer } from 'mobx-react-lite';
-import ActivityStore from '../../../app/stores/activityStore';
 
 const ActivityDashboard: React.FC = () => {
-    const activityStore = useContext(ActivityStore);
-    const {editMode, activity} = activityStore;
     return (
         <Fragment>
             <Grid>

@@ -9,7 +9,7 @@ class ActivityStore {
     @observable activityRegistry = new Map();
     @observable activities: IActivity[] = [];
     @observable loadingInitial = false;
-    @observable activity: IActivity | undefined;
+    @observable activity: IActivity | null = null;
     @observable editMode = false;
     @observable activityForm: IActivity | undefined;
     @observable submiting = false;
@@ -58,6 +58,10 @@ class ActivityStore {
                 console.log(error);
             }
         }
+    }
+
+    @action cleanActivity = () => {
+        this.activity = null;
     }
 
     getActivity = (id: string) => {
@@ -127,7 +131,7 @@ class ActivityStore {
     }
 
     @action cancelSelectedActivity = () => {
-        this.activity = undefined;
+        this.activity = null;
 
     }
 
@@ -137,7 +141,7 @@ class ActivityStore {
 
     @action openCreateForm = () => {
         this.editMode = true;
-        this.activity = undefined;
+        this.activity = null;
     }
 
 
